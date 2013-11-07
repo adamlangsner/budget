@@ -105,7 +105,7 @@ function ($, _, Marionette, Transaction, TransactionView, AddTransactionView) {
 			this.hideAddTransactionView();
 			this.model.get('transactions').add(this.transaction);
 			this.transaction = undefined;
-			this.model.save({});
+			this.model.save({}, {silent: true}); // don't want to trigger reset event
 		}
 	});
 });
