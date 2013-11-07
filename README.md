@@ -13,6 +13,7 @@ npm install
 ## Run It
 ```
 cd /path/to/budget/
+grunt compass:compile
 node server.js
 ```
 
