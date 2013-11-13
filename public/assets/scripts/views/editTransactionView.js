@@ -6,6 +6,6 @@ define(
 ],
 function ($, _, Marionette) {
     return Marionette.ItemView.extend({
-        template: 'addTransaction'
+        template: 'editTransaction'
     });
 });

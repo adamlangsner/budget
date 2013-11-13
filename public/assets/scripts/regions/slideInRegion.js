@@ -17,17 +17,25 @@ function(Marionette) {
 
         open: function(view) {
             Marionette.Region.prototype.open.apply(this, arguments);
+            this.$el.show();
             this.$el.animate({
                 right: parseFloat(this.$el.css('right')) - this.$el.width()
             }, function() {
-                console.log('hello');
                 this.animating = false;
             }.bind(this));
         },
 
         close: function() {
+            if (this.animating) { return; }
+            this.animating = true;
 
-            Marionette.Region.prototype.close.apply(this, arguments);
+            this.$el.animate({
+                right: parseFloat(this.$el.css('right')) + this.$el.width()
+            }, function() {
+                Marionette.Region.prototype.close.apply(this, arguments);
+                this.$el.hide();
+                this.animating = false;
+            }.bind(this));
         }
     });
 });

@@ -5,9 +5,9 @@ define(
 "marionette",
 "models/transaction",
 "views/sideBar/transactionView",
-"views/addTransactionView"
+"views/editTransactionView"
 ],
-function ($, _, Marionette, Transaction, TransactionView, AddTransactionView) {
+function ($, _, Marionette, Transaction, TransactionView, EditTransactionView) {
 	return Marionette.Layout.extend({
 
 		template: 'sideBar/sideBar',
@@ -20,7 +20,8 @@ function ($, _, Marionette, Transaction, TransactionView, AddTransactionView) {
 		ui: {
 			currentBalance: "input[name=currentBalance]",
 			addTxnArea: ".add-transaction",
-			addTxnButton: ".add-transaction button"
+			addTxnButton: ".add-txn-btn",
+			nevermindButton: ".nevermind-btn"
 		},
 
 		regions: {
@@ -29,10 +30,8 @@ function ($, _, Marionette, Transaction, TransactionView, AddTransactionView) {
 
 		events: {
 			"keyup input[name=currentBalance]": "onCurrentBalanceChange",
-			"click .add-transaction button": "showAddTransactionView"
-		},
-
-		initialize: function() {
+			"click .add-txn-btn": "showEditTransactionView",
+			"click .nevermind-btn": "hideEditTransactionView"
 		},
 
 		onRender: function() {
@@ -43,33 +42,42 @@ function ($, _, Marionette, Transaction, TransactionView, AddTransactionView) {
 			}));
 		},
 
-		showAddTransactionView: function(e) {
+		showEditTransactionView: function(e) {
 			// standard animation stuff
 			if (this.animating) { return; }
 			this.animating = true;
 
-			this.ui.addTxnArea.slideUp(function() {
-				this.animating = false;
-			}.bind(this));
+			_.each([this.ui.addTxnButton, this.ui.nevermindButton], function(btn) {
+				btn.blur();
+				btn.animate({
+					left: parseFloat(btn.css('left')) - (15 + btn.outerWidth())
+				}, function() {
+					// ostrich algorithm
+					this.animating = false;
+				}.bind(this));
+			}, this);
 
-			App.slideIn.show(new AddTransactionView());
+			App.slideIn.show(new EditTransactionView({
+				model: new Transaction()
+			}));
+		},
 
-			// // create new transaction and show the view with the form for the transaction
-			// this.transaction = new Transaction();
-			// this.addTransactionRegion.show(new AddTransactionView({
-			// 	model: this.transaction
-			// }));
+		hideEditTransactionView: function(e) {
+			// standard animation stuff
+			if (this.animating) { return; }
+			this.animating = true;
 
-			// // animate in the form
-			// this.ui.addTxnButton.fadeOut();
-			// this.ui.addTxnArea.animate({height: '200px'}, function() {
-			// 	this.ui.addTxnArea.css('height', 'auto');
-			// 	this.ui.addTxnRegion.fadeIn();
-			// 	this.ui.addButton.fadeIn();
-			// 	this.ui.closeButton.fadeIn(function() {
-			// 		this.animating = false;
-			// 	}.bind(this));
-			// }.bind(this));
+			_.each([this.ui.addTxnButton, this.ui.nevermindButton], function(btn) {
+				btn.blur();
+				btn.animate({
+					left: parseFloat(btn.css('left')) + (15 + btn.outerWidth())
+				}, function() {
+					// ostrich algorithm
+					this.animating = false;
+				}.bind(this));
+			}, this);
+
+			App.slideIn.close();
 		},
 
 		onCurrentBalanceChange: function(e) {

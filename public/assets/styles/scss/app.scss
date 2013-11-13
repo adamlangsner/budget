@@ -34,7 +34,8 @@ body {
 		border: 1px solid $color-border;
 
         #slideIn {
-            z-index: 1;
+            display: none;
+            z-index: $z-slide-in;
             background: rgba(#f0f0f0, 0.9);
             width: $slide-in-width;
             height: $slide-in-height;
@@ -50,7 +51,7 @@ body {
         }
 
         #sideBar {
-            z-index: 2;
+            z-index: $z-side-bar;
             position: absolute;
             height: 100%;
             border-right: 1px solid $color-border;
