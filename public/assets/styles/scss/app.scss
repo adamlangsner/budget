@@ -22,7 +22,8 @@ body {
 	font-family: helvetica, arial, sans-serif;
 
 	#mainContent {
-		overflow-y: hidden;
+        position: relative;
+		overflow: hidden;
 		@include clearfix;
 		width: $app-width;
 		height: $app-height;
@@ -31,6 +32,29 @@ body {
 		@include cross_browser_linear_gradient(#fff, #f0f0f0);
 		@include border-radius(3px);
 		border: 1px solid $color-border;
+
+        #slideIn {
+            z-index: 1;
+            background: rgba(#f0f0f0, 0.9);
+            width: $slide-in-width;
+            height: $slide-in-height;
+
+            position: absolute;
+            right: $slide-in-width + 30px;
+            top: 30px;
+
+            @include border-right-radius(8px);
+            border: 1px solid $color-border;
+            @include box-shadow(0 0 6px #aaa);
+
+        }
+
+        #sideBar {
+            z-index: 2;
+            position: absolute;
+            height: 100%;
+            border-right: 1px solid $color-border;
+        }
 	}
 }
 

@@ -6,10 +6,11 @@ define(
 "marionette",
 "models/graphInfo",
 "views/graphView",
-"views/sideBar/sideBarView"
+"views/sideBar/sideBarView",
+"regions/slideInRegion"
 ],
 
-function ($, _, Backbone, Marionette, GraphInfo, GraphView, SideBarView) {
+function ($, _, Backbone, Marionette, GraphInfo, GraphView, SideBarView, SlideInRegion) {
 
     App = new Marionette.Application();
 
@@ -23,6 +24,10 @@ function ($, _, Backbone, Marionette, GraphInfo, GraphView, SideBarView) {
         // create application level regions for sidebar and graph
         App.addRegions({
             sideBar: "section#sideBar",
+            slideIn: {
+                selector: "section#slideIn",
+                regionType: SlideInRegion
+            },
             graphArea: "section#graphArea"
         });
     });

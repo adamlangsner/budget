@@ -1,195 +1,96 @@
-#sideBar {
+#sideBar > .side-bar {
 	float: left;
 	height: 100%;
-	border-right: 1px solid $color-border;
+	width: $sideBar-width;
+	background: white;
 
-	& > .side-bar {
-		float: left;
-		height: 100%;
-		width: $sideBar-width;
+	& > .top-part {
+		position: relative;
+		z-index: 1;
+		@include box-shadow(0 2px 6px #aaa);
 
-		& > .top-part {
-			position: relative;
-			z-index: 1;
-			@include box-shadow(0 2px 6px #aaa);
+		& > div {
+			padding: 15px;
+		}
 
-			& > div {
-				padding: 15px;
+		& > .current-balance {
+			@include bevel_edge(bottom);
+
+			h2 {
+				line-height: 16px;
 			}
 
-			& > .current-balance {
-				@include bevel_edge(bottom);
-
-				h2 {
-					line-height: 16px;
-				}
-
-				input {
-					width: 80px;
-					line-height: 14px;
-					font-size: 14px;
-					text-align: right;
-					margin-left: 3px;
-				}
-			}
-
-			& > .add-transaction {
-				text-align: center;
-
-				button.add-txn {
-					width: 100%;
-					height: 30px;
-				}
-
-				button.close {
-					display: none;
-					position: relative;
-					top: -12px;
-					right: -5px;
-				}
-
-				.add-transaction-region {
-					margin-top: 20px;
-					display: none;
-
-					.input-line {
-						margin: 8px 0;
-						@include clearfix();
-
-						h2 {
-							height: 20px;
-							line-height: 20px;
-						}
-
-						input {
-							text-align: right;
-							width: 140px;
-
-							&[name="amount"] {
-								margin-left: 3px;
-							}
-						}
-
-						button.once {
-							width: 66px;
-						}
-					}
-
-					.frequency-region {
-						display: none;
-
-						.datepicker {
-							margin: 0 auto;
-						}
-
-						.input-line:first-child {
-							margin-top: 0;
-						}
-
-						input[type="number"] {
-							width: 40px;
-						}
-
-						.dropdown-label {
-							width: 47px;
-						}
-
-						.every-section {
-							float: right;
-							@include clearfix();
-							width: 154px;
-
-							input {
-								height: 20px;
-							}
-						}
-
-						.input-append.date {
-							padding: 0;
-							input {
-								width: 100px;
-							}
-						}
-
-						.spec-input {
-							.datepicker {
-								thead {
-									display: none;
-								}
-
-								td {
-									width: 15px;
-									padding: 2px 7px;
-
-									&.old, &.new {
-										visibility: hidden;
-									}
-								}
-							}
-						}
-					}
-				}
-
-				button.add {
-					display: none;
-					width: 100%;
-				}
+			input {
+				width: 80px;
+				line-height: 14px;
+				font-size: 14px;
+				text-align: right;
+				margin-left: 3px;
 			}
 		}
 
-		.transactions-region {
-			overflow: scroll;
-			height: 433px;
+		& > .add-transaction {
+			text-align: center;
 
-			.transaction {
-				padding: 5px 15px 5px 10px;
-				height: 40px;
-				@include cross_browser_linear_gradient(#e6e6e6, #cdcdcd);
-				border-bottom: 1px solid #bbb;
+			button {
+				width: 100%;
+				height: 30px;
+			}
+		}
+	}
 
-				.left-side {
-					float: left;
+	.transactions-region {
+		overflow: scroll;
+		height: 433px;
 
-					h2 {
-						margin-bottom: 0;
-					}
+		.transaction {
+			padding: 5px 15px 5px 10px;
+			height: 40px;
+			@include cross_browser_linear_gradient(#e6e6e6, #cdcdcd);
+			border-bottom: 1px solid #bbb;
 
-					span {
-						display: inline-block;
-						margin-bottom: 0;
-						font-size: 13px;
-						@include text_shadow(white);
-						max-width: 135px;
-						height: 20px;
-						overflow: hidden;
+			.left-side {
+				float: left;
 
-					}
+				h2 {
+					margin-bottom: 0;
 				}
 
-				.amount-area {
-					input {
-						display: none;
-						width: 80px;
-						height: 15px;
-						line-height: 15px;
-						text-align: right;
-					}
+				span {
+					display: inline-block;
+					margin-bottom: 0;
+					font-size: 13px;
+					@include text_shadow(white);
+					max-width: 135px;
+					height: 20px;
+					overflow: hidden;
+
+				}
+			}
+
+			.amount-area {
+				input {
+					display: none;
+					width: 80px;
+					height: 15px;
+					line-height: 15px;
+					text-align: right;
+				}
+			}
+
+			button.edit {
+				filter: alpha(opacity=100);
+				opacity: 1;
+				height: 14px;
+				margin: 4px 0 0 6px;
+
+				.icon-ok {
+					display: none;
 				}
 
-				button.edit {
-					filter: alpha(opacity=100);
-					opacity: 1;
-					height: 14px;
-					margin: 4px 0 0 6px;
-
-					.icon-ok {
-						display: none;
-					}
-
-					&:hover {
-						opacity: 0.4;
-						filter: alpha(opacity=40);
-					}
+				&:hover {
+					opacity: 0.4;
+					filter: alpha(opacity=40);
 				}
 			}
 		}
