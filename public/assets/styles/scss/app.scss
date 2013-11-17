@@ -14,6 +14,7 @@
 
 @import "_sideBar";
 @import "_graphArea";
+@import "_editTransaction";
 
 body {
 	@include image('repeating/maze_white');
@@ -48,6 +49,7 @@ body {
             border: 1px solid $color-border;
             @include box-shadow(0 0 6px #aaa);
 
+            padding: 15px;
         }
 
         #sideBar {

@@ -1,0 +1,17 @@
+.edit-transaction-view {
+
+    .top-area {
+        border: 1px solid $color-border;
+        @include border-radius(3px);
+        @include clearfix;
+
+        span {
+            float: left;
+
+            h2 {
+
+            }
+
+        }
+    }
+}
