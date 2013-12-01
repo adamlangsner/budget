@@ -1,17 +1,67 @@
 .edit-transaction-view {
 
-    .top-area {
-        border: 1px solid $color-border;
-        @include border-radius(3px);
+    section {
         @include clearfix;
+        margin: 15px 0 30px;
 
         span {
             float: left;
+            margin-left: 45px;
 
-            h2 {
+            select {
+                margin: 0;
+                height: 25px;
 
+                &.frequency-selector {
+                    width: 55px;
+                }
+
+                &.unit-selector {
+                    width: 90px;
+                }
             }
 
+            .often-inputs {
+                line-height: 25px;
+            }
+
+
+            .pressable {
+                cursor: pointer;
+                @include user-select(none);
+
+                &:hover {
+                    color: white;
+                    background: aqua;
+                }
+
+                &.pressed {
+                    color: white;
+                    background: navy;
+                }
+            }
+
+            table {
+                table-layout: fixed;
+
+                td {
+                    padding: 0;
+                    margin: 5px;
+                    width: 30px;
+                    line-height: 30px;
+                    overflow: hidden;
+                    text-align: center;
+                }
+            }
+
+            .week-list {
+                @include clearfix();
+
+                li {
+                    float: left;
+                    margin-left: 20px;
+                }
+            }
         }
     }
 }

@@ -1,16 +1,50 @@
-<div class="top-area">
-    <span>
-        <h2>What's it called?</h2>
-        <input type="text" />
-    </span>
+<form>
+    <section class="top-area">
+        <span>
+            <h2>Is it income or an expense?</h2>
+            <div class=" btn-group type" data-toggle="buttons-radio">
+                <button type="button" class="btn btn-success">Income</button>
+                <button type="button" class="btn btn-danger">Expense</button>
+            </div>
+        </span>
 
-    <span>
-        <h2>How much $$$ is it?</h2>
-        <input type="text" />
-    </span>
+        <span>
+            <h2>What's it called?</h2>
+            <input type="text" />
+        </span>
 
-    <span>
-        <h2>Is is income or an expense?</h2>
-        <input type="text" />
-    </span>
-</div>
+        <span>
+            <h2>How many dollars is it?</h2>
+            <input type="text" />
+        </span>
+    </section>
+
+    <section class="mid-area">
+        <span>
+            <h2>How often does it happen?</h2>
+            <div class="often-inputs">
+                Every
+                <select class="frequency-selector">
+                    <option value"1" selected>1</option>
+                    <option value"2">2</option>
+                    <option value"3">3</option>
+                    <option value"4">4</option>
+                    <option value"5">5</option>
+                    <option value"6">6</option>
+                </select>
+
+                <select class="unit-selector">
+                    <option value="months" selected>Month(s)</option>
+                    <option value="weeks">Week(s)</option>
+                    <option value="days">Day(s)</option>
+                    <option value="years">Year(s)</option>
+                </select>
+            </div>
+        </span>
+    </section>
+
+    <section class="low-area">
+        <span>
+        </span>
+    </section>
+</form>

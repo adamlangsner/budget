@@ -7,7 +7,7 @@ define(
 function($, _, Marionette) {
 	Marionette.TemplateCache.prototype.loadTemplate = function(templateId) {
         var html = '';
-        
+
         if (templateId) {
             $.ajax({
                 url: "assets/templates/" + templateId + ".html",
@@ -17,7 +17,7 @@ function($, _, Marionette) {
                 }
             });
         }
-        
+
         return html;
 	};
 });
