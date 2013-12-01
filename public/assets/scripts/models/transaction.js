@@ -56,7 +56,10 @@ function(_, moment, Backbone) {
 		},
 
 		_match_years: function(date, spec, diff) {
-			return date.isSame(moment(spec)) && this._matches_frequency(diff, this.get('frequency'));
+			var specDate = moment(spec);
+			return date.month() === specDate.month() &&
+					date.date() === specDate.date() &&
+					this._matches_frequency(diff, this.get('frequency'));
 		},
 
 		_match_months: function(date, spec, diff) {

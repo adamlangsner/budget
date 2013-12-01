@@ -9,7 +9,11 @@ function ($, _, Marionette, SpecView) {
 
     var specViews = {
         months: SpecView.extend({
-            template: 'monthSpec'
+            template: 'monthSpec',
+
+            transform_input: function(raw) {
+                return parseInt(raw);
+            }
         }),
         weeks: SpecView.extend({
             template: 'weekSpec'
@@ -18,7 +22,16 @@ function ($, _, Marionette, SpecView) {
             template: 'daySpec'
         }),
         years: SpecView.extend({
-            template: 'yearSpec'
+            template: 'yearSpec',
+
+            get_specs: function() {
+                return _.map(this.$('.calendar-day-input'), function(cal_input) {
+                    var $cal_input = $(cal_input),
+                        $month = $cal_input.find('.month-selector'),
+                        $date = $cal_input.find('.date-selector');
+                    return $month.val() + "-" + $date.val();
+                }, this);
+            }
         })
     };
 
@@ -35,7 +48,8 @@ function ($, _, Marionette, SpecView) {
         },
 
         events: {
-            "change .unit-selector": "updateLowArea"
+            "change .unit-selector": "updateLowArea",
+            "click .create-transaction": "createTransaction"
         },
 
         onShow: function() {
@@ -47,6 +61,12 @@ function ($, _, Marionette, SpecView) {
             this.lowArea.show(new (specViews[unit])({
 
             }));
+        },
+
+        createTransaction: function(e) {
+            e.preventDefault();
+
+
         }
     });
 });

@@ -62,6 +62,20 @@
                     margin-left: 20px;
                 }
             }
+
+            .calendar-day-input {
+                select {
+                    margin-left: 20px;
+
+                    &.month-selector {
+                        width: 115px;
+                    }
+
+                    &.date-selector {
+                        width: 40px;
+                    }
+                }
+            }
         }
     }
 }
