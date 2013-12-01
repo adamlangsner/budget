@@ -44,11 +44,14 @@ function ($, _, Marionette, SpecView) {
         },
 
         ui: {
-            unitSelector: ".unit-selector"
+            frequencySelector: ".frequency-selector",
+            unitSelector: ".unit-selector",
+            nameInput: "input[name=name]",
+            amountInput: "input[name=amount]"
         },
 
         events: {
-            "change .unit-selector": "updateLowArea",
+            "change .unit-selector": "onChangeUnit",
             "click .create-transaction": "createTransaction"
         },
 
@@ -56,17 +59,32 @@ function ($, _, Marionette, SpecView) {
             this.ui.unitSelector.trigger('change');
         },
 
-        updateLowArea: function(e) {
-            var unit = this.ui.unitSelector.val();
-            this.lowArea.show(new (specViews[unit])({
+        onChangeUnit: function(e) {
+            this.ui.frequencySelector.val(1);
 
-            }));
+            var unit = this.ui.unitSelector.val();
+            if (unit === 'years') {
+                this.ui.frequencySelector.attr('disabled', 'disabled');
+            } else {
+                this.ui.frequencySelector.removeAttr('disabled');
+            }
+
+            this.lowArea.show(new (specViews[unit])({}));
         },
 
         createTransaction: function(e) {
             e.preventDefault();
 
+            this.model.set({
+                name: this.ui.nameInput.val(),
+                amount: parseInt(this.ui.amountInput.val()),
+                type: this.$('.type button.active').text().toLowerCase(),
+                unit: this.ui.unitSelector.val(),
+                frequency: this.ui.frequencySelector.val(),
+                specifics: this.lowArea.currentView.get_specs()
+            });
 
+            this.trigger('createdTransaction', this.model);
         }
     });
 });

@@ -61,11 +61,16 @@ function ($, _, Marionette) {
 
         templateHelpers: {
             calendar_day: function() {
-                var selectedIndex = 0;
-                return '<span class="calendar-day-input">' +
+                var selectedIndex = 0,
+                    button = this.self.$('.date-inputs').children().length > 0
+                        ? '<button class="btn btn-link remove-input">remove</button>'
+                        : '';
+
+                return '<div class="calendar-day-input">' +
                         this._build_select(months, selectedIndex, 'month-selector') +
                         this.days_selector(months[selectedIndex], 'date-selector') +
-                        '</span>';
+                        button +
+                        '</div>';
             },
 
             days_selector: function(month, className) {
@@ -94,7 +99,13 @@ function ($, _, Marionette) {
 
         events: {
             "click .pressable": "on_press",
-            "change .month-selector": "update_date_selector"
+            "change .month-selector": "update_date_selector",
+            "click .add-date": "add_date_input",
+            "click .remove-input": "remove_date_input"
+        },
+
+        initialize: function() {
+            this.templateHelpers.self = this;
         },
 
         on_press: function(e) {
@@ -108,6 +119,29 @@ function ($, _, Marionette) {
                 $dateSelector = $(this.templateHelpers.days_selector(month, 'date-selector'));
 
             $parent.find('.date-selector').replaceWith($dateSelector);
+        },
+
+        add_date_input: function(e) {
+            e.preventDefault();
+
+            var $dInputs = this.$('.date-inputs');
+
+            if ($dInputs.children().length < 4) {
+                $dInputs.append($(this.templateHelpers.calendar_day()));
+            }
+
+            if ($dInputs.children().length === 4) {
+                $(e.currentTarget).hide();
+            }
+        },
+
+        remove_date_input: function(e) {
+            e.preventDefault();
+
+            var $dInputs = this.$('.date-inputs');
+
+            $(e.currentTarget).parent().remove();
+            this.$('.add-date').show();
         },
 
         // can be overridden

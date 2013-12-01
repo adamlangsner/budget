@@ -57,9 +57,17 @@ function ($, _, Marionette, Transaction, TransactionView, EditTransactionView) {
 				}.bind(this));
 			}, this);
 
-			App.slideIn.show(new EditTransactionView({
+
+			var editTxnView = new EditTransactionView({
 				model: new Transaction()
-			}));
+			});
+
+			editTxnView.on('createdTransaction', function(txn) {
+				this.model.get('transactions').add(txn);
+				this.model.save({}, {silent: true}); // don't want to trigger reset event
+			}, this);
+
+			App.slideIn.show(editTxnView);
 		},
 
 		hideEditTransactionView: function(e) {
