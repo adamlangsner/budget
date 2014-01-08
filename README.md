@@ -3,9 +3,6 @@ budget
 
 ## Install It
 ```
-brew update
-brew install mongodb
-
 cd /path/to/budget/
 npm install
 ```
