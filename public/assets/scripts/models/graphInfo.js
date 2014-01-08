@@ -75,7 +75,7 @@ function(_, moment, Backbone, Transaction) {
 					dates = txn.dates(this.get('start'), this.get('end'));
 
 				this._update_data(dates, diff);
-				this.save({});
+				this.save({}, {silent: true});
 			}, this);
 		},
 

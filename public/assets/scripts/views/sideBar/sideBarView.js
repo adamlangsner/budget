@@ -63,10 +63,15 @@ function ($, _, Marionette, Transaction, TransactionView, AddTransactionChain) {
 
 		onCurrentBalanceChange: function(e) {
 			clearTimeout(this.currentBalanceTimeout);
-			this.currentBalanceTimeout = setTimeout(function() {
-				this.model.set('currentBalance', parseInt($(e.currentTarget).val()) || 0);
-				this.model.save({});
-			}.bind(this), 150);
+
+			this.currentBalanceTimeout = setTimeout(_.bind(function() {
+
+				var newBalance = parseInt($(e.currentTarget).val()) || 0;
+
+				this.model.set('currentBalance', newBalance);
+				this.model.save({}, {silent: true});
+
+			}, this), 150);
 		}
 	});
 });
