@@ -5,9 +5,9 @@ define(
 "marionette",
 "models/transaction",
 "views/sideBar/transactionView",
-"views/editTransactionView"
+"chains/addTransactionChain"
 ],
-function ($, _, Marionette, Transaction, TransactionView, EditTransactionView) {
+function ($, _, Marionette, Transaction, TransactionView, AddTransactionChain) {
 	return Marionette.Layout.extend({
 
 		template: 'sideBar/sideBar',
@@ -30,8 +30,7 @@ function ($, _, Marionette, Transaction, TransactionView, EditTransactionView) {
 
 		events: {
 			"keyup input[name=currentBalance]": "onCurrentBalanceChange",
-			"click .add-txn-btn": "showEditTransactionView",
-			"click .nevermind-btn": "hideEditTransactionView"
+			"click .add-txn-btn": "addTransaction"
 		},
 
 		onRender: function() {
@@ -42,50 +41,24 @@ function ($, _, Marionette, Transaction, TransactionView, EditTransactionView) {
 			}));
 		},
 
-		showEditTransactionView: function(e) {
-			// standard animation stuff
-			if (this.animating) { return; }
-			this.animating = true;
+		addTransaction: function(e) {
+			if (this.isAddingTxn) {
+				return;
+			}
 
-			_.each([this.ui.addTxnButton, this.ui.nevermindButton], function(btn) {
-				btn.blur();
-				btn.animate({
-					left: parseFloat(btn.css('left')) - (15 + btn.outerWidth())
-				}, function() {
-					// ostrich algorithm
-					this.animating = false;
-				}.bind(this));
-			}, this);
+			this.isAddingTxn = true;
 
+			AddTransactionChain.start({
+				onComplete: _.bind(function(txn) {
+					this.isAddingTxn = false;
+					this.model.get('transactions').add(txn);
+					this.model.save({}, { silent: true });
+				}, this),
 
-			var editTxnView = new EditTransactionView({
-				model: new Transaction()
+				onCancel: _.bind(function(txn) {
+					this.isAddingTxn = false;
+				}, this)
 			});
-
-			editTxnView.on('createdTransaction', function(txn) {
-				this.model.get('transactions').add(txn);
-				this.model.save({}, {silent: true}); // don't want to trigger reset event
-			}, this);
-
-			App.slideIn.show(editTxnView);
-		},
-
-		hideEditTransactionView: function(e) {
-			// standard animation stuff
-			if (this.animating) { return; }
-			this.animating = true;
-
-			_.each([this.ui.addTxnButton, this.ui.nevermindButton], function(btn) {
-				btn.blur();
-				btn.animate({
-					left: parseFloat(btn.css('left')) + (15 + btn.outerWidth())
-				}, function() {
-					// ostrich algorithm
-					this.animating = false;
-				}.bind(this));
-			}, this);
-
-			App.slideIn.close();
 		},
 
 		onCurrentBalanceChange: function(e) {

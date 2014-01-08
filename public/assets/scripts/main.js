@@ -19,6 +19,7 @@ require(
 "app",
 "bootstrap",
 "bootstrap.datepicker",
+"common/mixins",
 "common/overrides"
 ],
 function($, App) {

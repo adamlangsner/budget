@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h3 class="modal-title">1. Name &amp; Amount</h3>
+</div>
+
+<div class="modal-body">
+    <p>
+        <label>What is this transaction named?</label>
+        <input type="text" name="name" />
+    </p>
+
+    <p>
+        <label>Is it income or an expense?</label>
+        <span id="type" class="btn-group" data-toggle="buttons-radio">
+            <button type="button" class="btn btn-success">Income</button>
+            <button type="button" class="btn btn-danger">Expense</button>
+        </span>
+    </p>
+
+    <p>
+        <label>How much money is it?</label>
+        <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input type="number" name="amount" class="form-control" />
+        </div>
+    </p>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+    <button type="button" class="btn btn-primary">Next</button>
+</div>

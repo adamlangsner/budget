@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <h3 class="modal-title">2. Frequency</h3>
+</div>
+
+<div class="modal-body">
+    <h4>How often does this transaction happen?</h4>
+
+    <div class="input-group one-time">
+        <span class="input-group-addon">
+            <input type="radio" name="type" value="one_time" />
+        </span>
+        <p>Just once</p>
+    </div>
+
+    <div class="input-group every">
+        <span class="input-group-addon">
+            <input type="radio" name="type" value="every" />
+        </span>
+        <p>
+            Every
+            <select class="every-select" name="frequency">
+                <%= every_options() %>
+            </select>
+            <select name="unit">
+                <%= unit_options(['Month', 'Week'], true) %>
+            </select>
+        </p>
+    </div>
+
+    <div class="input-group once">
+        <span class="input-group-addon">
+            <input type="radio" name="type" value="once" />
+        </span>
+        <p>
+            <select name="frequency">
+                <%= once_options() %>
+            </select>
+            a
+            <select name="unit">
+                <%= unit_options(['Month', 'Week', 'Year']) %>
+            </select>
+        </p>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+    <button type="button" class="btn btn-primary">Next</button>
+</div>

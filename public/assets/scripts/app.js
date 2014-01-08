@@ -7,10 +7,11 @@ define(
 "models/graphInfo",
 "views/graphView",
 "views/sideBar/sideBarView",
-"regions/slideInRegion"
+"regions/slideInRegion",
+"regions/modalRegion"
 ],
 
-function ($, _, Backbone, Marionette, GraphInfo, GraphView, SideBarView, SlideInRegion) {
+function ($, _, Backbone, Marionette, GraphInfo, GraphView, SideBarView, SlideInRegion, ModalRegion) {
 
     App = new Marionette.Application();
 
@@ -28,7 +29,8 @@ function ($, _, Backbone, Marionette, GraphInfo, GraphView, SideBarView, SlideIn
                 selector: "section#slideIn",
                 regionType: SlideInRegion
             },
-            graphArea: "section#graphArea"
+            graphArea: "section#graphArea",
+            modal: ModalRegion,
         });
     });
 

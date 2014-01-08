@@ -5,7 +5,7 @@ define(
 "marionette"
 ],
 function ($, _, Marionette) {
-	var onces = ['Once', 'Twice', 'Three times', 'Four times', 'Five times', 'Six times'];
+	var onces = ['Once', 'Twice', 'Three times', 'Four times', 'Five times', 'Six times', 'Seven times'];
 
 	return Marionette.ItemView.extend({
 

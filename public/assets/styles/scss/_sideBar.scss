@@ -35,18 +35,8 @@
 			overflow: hidden;
 
 			button {
-				position: absolute;
-				top: 15px;
 				width: 250px;
 				height: 30px;
-
-				&.add-txn-btn {
-					left: 15px;
-				}
-
-				&.nevermind-btn {
-					left: 280px;
-				}
 			}
 		}
 	}

@@ -1,0 +1,40 @@
+#modal {
+    display: none;
+
+    .modal-content {
+        p {
+            margin-bottom: 20px;
+        }
+
+        .name-and-amount-view {
+            input[name=amount] {
+                width: 175px;
+            }
+        }
+
+        .frequency-view {
+
+            .input-group {
+                margin-bottom: 20px;
+
+                p {
+                    width: 250px;
+                    margin: 0;
+                    padding: 6px 12px;
+                    border: 1px solid #ccc;
+                    @include border-top-right-radius(4px);
+                    @include border-bottom-right-radius(4px);
+                }
+
+                select {
+                    margin: 0;
+                    width: 100px;
+
+                    &.every-select {
+                        width: 50px;
+                    }
+                }
+            }
+        }
+    }
+}

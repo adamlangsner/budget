@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h3 class="modal-title">3. Dates</h3>
+</div>
+
+<div class="modal-body">
+    <h4><%= header() %></h4>
+
+    <% _.each(self.model.get('specifics'), function() { %>
+        <p>
+            <%= specific() %>
+        </p>
+    <% }) %>
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+    <button type="button" class="btn btn-success">Done</button>
+</div>
