@@ -2,9 +2,10 @@ define(
 [
 "jquery",
 "underscore",
-"marionette"
+"marionette",
+"views/sideBar/removeTxnView"
 ],
-function ($, _, Marionette) {
+function ($, _, Marionette, RemoveTxnView) {
 	var onces = ['Once', 'Twice', 'Three times', 'Four times', 'Five times', 'Six times', 'Seven times'];
 
 	return Marionette.ItemView.extend({
@@ -61,7 +62,9 @@ function ($, _, Marionette) {
 		},
 
 		events: {
-			"click button.edit": "editAmount",
+			"click button.edit .icon-pencil": "editAmount",
+			"click button.edit .icon-ok": "editAmount",
+			"click button.edit .icon-remove": "removeTransaction",
 			'keyup input[name="amount"]': 'changeAmount'
 		},
 
@@ -81,6 +84,12 @@ function ($, _, Marionette) {
 			this.ui.amountInput[actions[1]]().val(this.model.get('amount'));
 
 			this.editing = !this.editing;
+		},
+
+		removeTransaction: function(e) {
+			App.modal.show(new RemoveTxnView({
+				model: this.model
+			}));
 		},
 
 		changeAmount: function(e) {

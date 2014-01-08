@@ -51,6 +51,7 @@ function(_, moment, Backbone, Transaction) {
 			});
 
 			this.get('transactions').on('add', this._on_add_transaction, this);
+			this.get('transactions').on('remove', this._on_remove_transaction, this);
 			this.get('transactions').on('reset', function(txns) {
 				txns.each(this._on_add_transaction, this);
 			}, this);
@@ -74,6 +75,16 @@ function(_, moment, Backbone, Transaction) {
 				this._update_data(dates, diff);
 				this.save({});
 			}, this);
+		},
+
+		_on_remove_transaction: function(txn) {
+			var total_change = 0,
+				dates = txn.isOneTime()
+					? [moment(txn.get('specifics')[0])]
+					: txn.dates(this.get('start'), this.get('end'));
+			this._update_data(dates, -1 * txn.signedAmount());
+
+			txn.off('change:amount');
 		},
 
 		_update_data: function(dates, amount) {

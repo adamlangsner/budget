@@ -17,8 +17,8 @@ function ($, _, Marionette) {
 
             var events = _.result(this, 'events');
 
-            if (this.options.onCancel) {
-                events["click .btn-default"] = this.options.onCancel;
+            if (this.onCancel || this.options.onCancel) {
+                events["click .btn-default"] = this.onCancel || this.options.onCancel;
             }
 
             this.onInitialize && this.onInitialize();

@@ -86,11 +86,19 @@
 				height: 14px;
 				margin: 4px 0 0 6px;
 
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				outline: none;
+
 				.icon-ok {
 					display: none;
 				}
 
-				&:hover {
+				i:hover {
 					opacity: 0.4;
 					filter: alpha(opacity=40);
 				}
