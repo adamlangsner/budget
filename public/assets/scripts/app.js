@@ -40,6 +40,7 @@ function ($, _, Backbone, Marionette, GraphInfo, GraphView, SideBarView, SlideIn
 
         // create a graphInfo model and hang it off of App object
         App.graphInfo = new GraphInfo({
+            id: 1,
             start: now,
             end: now.clone().add('months', 12)
         });

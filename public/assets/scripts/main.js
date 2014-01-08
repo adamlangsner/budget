@@ -9,7 +9,8 @@ require.config({
 		marionette: "libs/marionette",
 		d3: "libs/d3",
 		'backbone.babysitter': "libs/backbone.babysitter",
-		'backbone.wreqr': "libs/backbone.wreqr"
+		'backbone.wreqr': "libs/backbone.wreqr",
+		'backbone.localStorage': "libs/backbone.localStorage"
 	}
 });
 

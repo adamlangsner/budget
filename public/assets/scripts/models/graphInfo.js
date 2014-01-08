@@ -3,12 +3,13 @@ define(
 "underscore",
 "moment",
 "backbone",
-"models/transaction"
+"models/transaction",
+"backbone.localStorage"
 ],
 function(_, moment, Backbone, Transaction) {
-
 	return Backbone.Model.extend({
-		idAttribute: '_id',
+
+		localStorage: new Backbone.LocalStorage("budgitMe"),
 
 		url: function() {
 			return '/api/budget';
@@ -16,7 +17,6 @@ function(_, moment, Backbone, Transaction) {
 
 		toJSON: function() {
 			var attribues = Backbone.Model.prototype.toJSON.call(this);
-			delete attribues._id;
 			return attribues;
 		},
 
@@ -34,6 +34,8 @@ function(_, moment, Backbone, Transaction) {
 				this.get('transactions').reset(resp.transactions);
 			}
 
+			delete resp.start;
+			delete resp.end;
 			delete resp.transactions;
 			return resp;
 		},
