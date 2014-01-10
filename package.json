@@ -1,16 +1,19 @@
 {
-  "name": "budget",
-  "description": "Grunt dependencies for various site related tasks",
-  "version": "0.0.1",
-  "dependencies": {
-    "grunt": "*",
-    "grunt-notify": "0.2.4",
-    "grunt-requirejs": "*",
-    "grunt-contrib-watch": "0.4.3",
-    "grunt-compass": "*",
-    "express": "*",
-    "underscore": "*",
-    "mongoose": "*",
-    "ejs": "*"
-  }
+    "name": "budget",
+    "description": "Grunt dependencies for various site related tasks",
+    "version": "0.0.1",
+    "dependencies": {
+        "grunt": "*",
+        "grunt-notify": "*",
+        "grunt-requirejs": "*",
+        "grunt-contrib-watch": "*",
+        "grunt-contrib-concat": "*",
+        "grunt-contrib-uglify": "*",
+        "grunt-contrib-copy": "*",
+        "grunt-compass": "*",
+        "grunt-css": "*",
+        "express": "*",
+        "underscore": "*",
+        "ejs": "*"
+    }
 }

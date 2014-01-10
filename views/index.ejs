@@ -1,8 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="assets/styles/css/app.css">
+	<link rel="stylesheet" type="text/css" href="<%= production ? 'css/app.css' : 'assets/styles/app.css' %>">
 	<title>Budget Graph</title>
+
+    <script type="text/javascript">
+        function loadTemplate(template_id) {
+            var html = '';
+
+            if (template_id) {
+
+                <% if (production) { %>
+
+
+                if (!window.$templateXML) {
+                    $.ajax({
+                        url: 'app.xml',
+                        async: false,
+                        success: function(xml) {
+                            window.$templateXML = $(xml);
+                        }
+                    });
+                }
+
+                html = window.$templateXML.find('template[name="'+template_id+'"]').text();
+
+
+                <% } else { %>
+
+
+                $.ajax({
+                    url: "assets/templates/" + template_id + ".html",
+                    async: false,
+                    success: function(templateHtml) {
+                        html = templateHtml;
+                    }
+                });
+
+
+                <% } %>
+            }
+
+            return html;
+        }
+    </script>
 </head>
 <body>
 
@@ -18,6 +59,11 @@
         </div>
     </div>
 
-	<script data-main="assets/scripts/main" src="assets/scripts/libs/require.js"></script>
+	<% if (production)  { %>
+        <script type="text/javascript" src="app.js"></script>
+    <% } else { %>
+        <script type="text/javascript" data-main="assets/scripts/main" src="assets/scripts/libs/require.js"></script>
+    <% } %>
+
 </body>
 </html>

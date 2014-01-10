@@ -2,3 +2,4 @@
 public/.sass-cache/*
 public/assets/styles/css/app.css
 node_modules/*
+build
