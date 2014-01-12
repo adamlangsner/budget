@@ -121,7 +121,8 @@ function($, _, ModalView) {
         },
 
         _get_years_specs: function($item) {
-            return $item.find('[name=month]').val() + '-'
+            return $item.find('[name=month]').val() +
+                    '-' +
                     $item.find('[name=date]').val();
         },
 
