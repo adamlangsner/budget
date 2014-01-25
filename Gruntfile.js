@@ -97,13 +97,17 @@ module.exports = function(grunt) {
 
     grunt.loadTasks('grunt_tasks');
 
+    grunt.registerTask('css', [
+        'compass:compile',
+        'copy:css',
+        'copy:images'
+    ]);
+
     grunt.registerTask('default', [
         'requirejs',
         'concat:js',
         'uglify:js',
-        'compass:compile',
-        'copy:css',
-        'copy:images',
+        'css',
         'templates:compile'
     ]);
 };
