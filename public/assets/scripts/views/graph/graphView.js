@@ -44,6 +44,8 @@ function ($, _, Marionette, Graph, Transaction, GraphTopView) {
 			this.graph = new Graph({
 				windowStart: App.now().add('days', this.start),
 				windowEnd: App.now().add('days', this.end),
+				dataStart: this.model.get('start').clone(),
+				dataEnd: this.model.get('end').clone(),
 				width: this.$el.width(),
 				height: this.$el.height() - 115,
 				x_margin: X_MARGIN,
@@ -65,8 +67,6 @@ function ($, _, Marionette, Graph, Transaction, GraphTopView) {
 			var values = this._getSliderValues(),
 				start = App.now().add('days', values[0]),
 				end = App.now().add('days', values[1]);
-
-			console.log(start, end);
 
 			this.graph.update(this.model.getData(), start, end);
 		}

@@ -1,4 +1,4 @@
-define(
+ define(
 [
 "jquery",
 "common/formatter",
@@ -16,6 +16,8 @@ function($, F) {
 		this.data = options.data;
 		this.windowStart = options.windowStart;
 		this.windowEnd = options.windowEnd;
+        this.dataStart = options.dataStart;
+        this.dataEnd = options.dataEnd;
 
 		this._initGraph();
 	}
@@ -138,16 +140,23 @@ function($, F) {
 				minY = _.min(subData, function(d) { return d.balance; }).balance,
 				maxY = _.max(subData, function(d) { return d.balance; }).balance;
 
-			this.x.domain([0, this._maxIndex()]);
+			this.x.domain([0, this._maxIndex() - this._minIndex()]);
 			this.y.domain([1.05*maxY, minY * (minY < 0 ? 1.1 : 0.9)]);
 		},
 
-		_maxIndex: function() {
-			return Math.round(this.windowEnd.diff(this.windowStart)/(1000*60*60*24));
+        _minIndex: function() {
+            return Math.round(this.windowStart.diff(this.dataStart, 'days'));
+        },
+
+        _maxIndex: function() {
+			return Math.round(this.windowEnd.diff(this.dataStart, 'days'));
 		},
 
-		_subData: function(data) {
-			return (data || this.data).slice(0, this._maxIndex()+1);
+		_subData: function(data, min, max) {
+            var min = min || this._minIndex(),
+                max = max || this._maxIndex();
+
+			return (data || this.data).slice(min, max+1);
 		},
 
 		_updateAxes: function() {
@@ -208,12 +217,12 @@ function($, F) {
         if (mouseY >= 0 && mouseY <= graph.height-2*graph.x_margin &&
             mouseX >= 1 && mouseX <= graph.width-graph.y_margin-graph.x_margin) {
 
-            var domainX = Math.min(Math.max(Math.floor(graph.x.invert(mouseX+graph.x_margin)), 1), graph._maxIndex());
+            var domainX = Math.min(Math.max(Math.floor(graph.x.invert(mouseX+graph.x_margin)+graph._minIndex()), 1), graph._maxIndex());
 
             var cur = graph.data[domainX],
                 last = graph.data[domainX-1],
                 diff = cur.balance - last.balance,
-                pastHalf = domainX > graph.data.length/2,
+                pastHalf = domainX > ((graph._maxIndex() - graph._minIndex())/2) + graph._minIndex(),
                 diffText = F.money(diff, 0),
                 dateText = cur.date.format('ddd, MMM. Do'),
                 balText = F.money(cur.balance, 0);
