@@ -5,50 +5,42 @@
 	background: white;
 
 	& > .top-part {
+		height: $topAreas-height;
+		padding: $topAreas-padding 0;
+		text-align: center;
 		position: relative;
 		z-index: 1;
-		@include box-shadow(0 2px 6px #aaa);
 
-		& > div {
-			padding: 15px;
-		}
+		border-bottom: $size-border solid $color-border;
 
-		& > .current-balance {
+		.add-txn-btn {
+			@include border-radius(20px);
+			border: none;
+			background-color: #5ab45a;
+			color: white;
+			font-weight: bold;
+			width: $sideBar-width - 30px;
+			height: 100%;
+			outline: none;
 
-			h2 {
-				line-height: 16px;
+			&:hover {
+				background-color: #61CF61;
 			}
 
-			input {
-				width: 80px;
-				line-height: 14px;
-				font-size: 14px;
-				text-align: right;
-				margin-left: 3px;
-			}
-		}
-
-		& > .add-transaction {
-			height: 30px;
-			width: 250px;
-			position: relative;
-			overflow: hidden;
-
-			button {
-				width: 250px;
-				height: 30px;
+			&:active {
+				background-color: #479747;
 			}
 		}
 	}
 
 	.transactions-region {
 		overflow: scroll;
-		height: 433px;
+		height: $app-height - 67px;
 
 		.transaction {
 			padding: 5px 15px 5px 10px;
 			height: 40px;
-			@include cross_browser_linear_gradient(#e6e6e6, #cdcdcd);
+			background-color: #f0f0f0;
 			border-bottom: 1px solid #bbb;
 
 			.left-side {
@@ -62,7 +54,6 @@
 					display: inline-block;
 					margin-bottom: 0;
 					font-size: 13px;
-					@include text_shadow(white);
 					max-width: 135px;
 					height: 20px;
 					overflow: hidden;

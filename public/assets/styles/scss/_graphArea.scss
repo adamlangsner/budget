@@ -7,19 +7,34 @@
 		height: 100%;
 	}
 
-	.horizon-slider {
+	.slider {
 		margin: 5px 80px 0 40px;
-		background: #ddd;
+	}
 
-		.ui-slider-range-min {
-			background: #cde;
-		}
+	.graph-top {
+		height: $topAreas-height;
+		width: 100%;
+		padding: $topAreas-padding 40px;
 
-		.ui-slider-handle {
-			width: 20px;
-			height: 20px;
-			border-radius: 50%;
-			border: 1px solid $color-border;
+		border-bottom: $size-border solid $color-border;
+
+		.current-balance {
+			width: 250px;
+			line-height: $topAreas-height;
+
+			label {
+				line-height: $topAreas-height;
+			}
+
+			input {
+				@include border-radius(0px);
+				border: 1px solid $color-border;
+				width: 80px;
+				line-height: 14px;
+				font-size: 14px;
+				text-align: right;
+				margin-left: 3px;
+			}
 		}
 	}
 }

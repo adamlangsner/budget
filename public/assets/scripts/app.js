@@ -5,7 +5,7 @@ define(
 "backbone",
 "marionette",
 "models/graphInfo",
-"views/graphView",
+"views/graph/graphView",
 "views/sideBar/sideBarView",
 "regions/slideInRegion",
 "regions/modalRegion"
@@ -16,8 +16,16 @@ function ($, _, Backbone, Marionette, GraphInfo, GraphView, SideBarView, SlideIn
     App = new Marionette.Application();
 
     App.addInitializer(function(options) {
+        var _now;
         _.extend(App, {
             // add methods to App object here
+            now: function() {
+                if (!_now) {
+                    _now = moment().startOf('day')
+                }
+
+                return _now.clone();
+            }
         });
     });
 
@@ -36,13 +44,12 @@ function ($, _, Backbone, Marionette, GraphInfo, GraphView, SideBarView, SlideIn
 
     // gets triggered when app starts
     App.on("start", function() {
-        var now = moment().startOf('day');
 
         // create a graphInfo model and hang it off of App object
         App.graphInfo = new GraphInfo({
             id: 1,
-            start: now,
-            end: now.clone().add('months', 12)
+            start: App.now(),
+            end: App.now().clone().add('days', 365)
         });
 
         // download the budget from the server

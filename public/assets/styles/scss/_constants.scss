@@ -1,17 +1,22 @@
 $img-dir: "../../images/";
 
 $app-width: 1168px;
-$app-height: 550px;
+$app-height: 650px;
 
+$topAreas-padding: 15px;
+$topAreas-height: 35px;
 $sideBar-width: 280px;
 $graph-width: $app-width - $sideBar-width - 1;
 $slide-in-width: $graph-width - 60px;
 $slide-in-height: $app-height - 90px;
 
 // colors
-$color-border: #bbb;
+$color-border: #000;
 $color-text: #333;
 
 // z-indexes
 $z-slide-in: 1;
 $z-side-bar: 2;
+
+// sizes
+$size-border: 2px;

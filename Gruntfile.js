@@ -81,7 +81,7 @@ module.exports = function(grunt) {
         notify: {
             watch: {
                 options: {
-                    title: 'CSS compiled'
+                    message: 'CSS compiled'
                 }
             }
         }

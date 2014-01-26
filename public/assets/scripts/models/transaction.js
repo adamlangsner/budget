@@ -44,7 +44,7 @@ function(_, moment, Backbone) {
 		},
 
 		_match: function(date, unit) {
-			var specs = this.get('specifics').length ? this.get('specifics') : [moment()];
+			var specs = this.get('specifics').length ? this.get('specifics') : [App.now()];
 
 			return _.reduce(specs, function(any_match, spec) {
 				return any_match || this['_match_'+unit](date, spec, this._diff(unit, date));
@@ -79,7 +79,7 @@ function(_, moment, Backbone) {
 		},
 
 		_diff: function(unit, date) {
-			return date.diff(moment().startOf('day'), unit);
+			return date.diff(App.now().startOf('day'), unit);
 		}
 	});
 });

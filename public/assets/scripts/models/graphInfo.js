@@ -52,6 +52,10 @@ function(_, moment, Backbone, Transaction) {
 				this.trigger('change:data');
 			});
 
+			this.on('change:end', function() {
+				this.trigger('change:data');
+			});
+
 			this.get('transactions').on('add', this._on_add_transaction, this);
 			this.get('transactions').on('remove', this._on_remove_transaction, this);
 			this.get('transactions').on('reset', function(txns) {
@@ -93,8 +97,7 @@ function(_, moment, Backbone, Transaction) {
 			var total_change = 0;
 
 			this._data.each(function(d, i) {
-				var date = this.get('start').clone().add('days', i);
-				if (date.isSame(dates[0])) {
+				if (d.get('date').isSame(dates[0], 'day')) {
 					total_change += amount;
 					dates.shift();
 				}

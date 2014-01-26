@@ -10,7 +10,8 @@ require.config({
 		d3: "libs/d3",
 		'backbone.babysitter': "libs/backbone.babysitter",
 		'backbone.wreqr': "libs/backbone.wreqr",
-		'backbone.localStorage': "libs/backbone.localStorage"
+		'backbone.localStorage': "libs/backbone.localStorage",
+		'nouislider': "libs/jquery.nouislider.min"
 	}
 });
 
@@ -18,6 +19,7 @@ require(
 [
 "jquery",
 "app",
+"nouislider",
 "bootstrap",
 "bootstrap.datepicker",
 "common/mixins",

@@ -14,7 +14,7 @@ function($, F) {
 		this.y_margin = options.y_margin;
 		this.selector = options.selector;
 		this.data = options.data;
-		this.now = options.now;
+		this.windowStart = options.windowStart;
 		this.windowEnd = options.windowEnd;
 
 		this._initGraph();
@@ -43,7 +43,7 @@ function($, F) {
 							.orient('bottom')
 							.ticks(20)
 							.tickSize(-1*(this.height - 2*this.x_margin), 0)
-							.tickFormat(function(x) { return self.now.clone().add('days', x).format('M/D'); });
+							.tickFormat(function(x) { return self.windowStart.clone().add('days', x).format('M/D'); });
 
 			this.yAxis = d3.svg.axis()
 							.scale(this.y)
@@ -133,8 +133,8 @@ function($, F) {
 			this.y.range([this.x_margin, this.height - this.x_margin]);
 		},
 
-		_updateScalesDomain: function(data) {
-			var subData = this._subData(data);
+		_updateScalesDomain: function() {
+			var subData = this._subData();
 				minY = _.min(subData, function(d) { return d.balance; }).balance,
 				maxY = _.max(subData, function(d) { return d.balance; }).balance;
 
@@ -143,7 +143,7 @@ function($, F) {
 		},
 
 		_maxIndex: function() {
-			return Math.round(this.windowEnd.diff(this.now)/(1000*60*60*24));
+			return Math.round(this.windowEnd.diff(this.windowStart)/(1000*60*60*24));
 		},
 
 		_subData: function(data) {
@@ -155,16 +155,18 @@ function($, F) {
 			this.yAxis && this.yAxis.scale(this.y);
 		},
 
-		update: function(data) {
+		update: function(data, windowStart, windowEnd) {
 			var self = this;
 
 			this.data = data || this.data;
+            this.windowStart = windowStart || this.windowStart;
+            this.windowEnd = windowEnd || this.windowEnd;
 
 			// Part 1
 			/////////
 
 			// update scales and axes
-			this._updateScalesDomain(data); // use new data
+			this._updateScalesDomain(); // use new data
 			this._updateAxes();
 
 			var path_update;

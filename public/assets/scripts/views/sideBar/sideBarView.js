@@ -18,10 +18,8 @@ function ($, _, Marionette, Transaction, TransactionView, AddTransactionChain) {
 		},
 
 		ui: {
-			currentBalance: "input[name=currentBalance]",
 			addTxnArea: ".add-transaction",
-			addTxnButton: ".add-txn-btn",
-			nevermindButton: ".nevermind-btn"
+			addTxnButton: ".add-txn-btn"
 		},
 
 		regions: {
@@ -29,7 +27,6 @@ function ($, _, Marionette, Transaction, TransactionView, AddTransactionChain) {
 		},
 
 		events: {
-			"keyup input[name=currentBalance]": "onCurrentBalanceChange",
 			"click .add-txn-btn": "addTransaction"
 		},
 
@@ -59,19 +56,6 @@ function ($, _, Marionette, Transaction, TransactionView, AddTransactionChain) {
 					this.isAddingTxn = false;
 				}, this)
 			});
-		},
-
-		onCurrentBalanceChange: function(e) {
-			clearTimeout(this.currentBalanceTimeout);
-
-			this.currentBalanceTimeout = setTimeout(_.bind(function() {
-
-				var newBalance = parseInt($(e.currentTarget).val()) || 0;
-
-				this.model.set('currentBalance', newBalance);
-				this.model.save({}, {silent: true});
-
-			}, this), 150);
 		}
 	});
 });
