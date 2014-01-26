@@ -19,8 +19,13 @@
 		border-bottom: $size-border solid $color-border;
 
 		.current-balance {
-			width: 250px;
+			width: 230px;
+			height: $height-rounded-rect;
 			line-height: $topAreas-height;
+			padding: 0 20px;
+
+			@include border-radius(20px);
+			background-color: #d0d0d0;
 
 			label {
 				line-height: $topAreas-height;

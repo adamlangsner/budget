@@ -20,7 +20,7 @@
 			color: white;
 			font-weight: bold;
 			width: $sideBar-width - 30px;
-			height: 100%;
+			height: $height-rounded-rect;
 			outline: none;
 
 			&:hover {
