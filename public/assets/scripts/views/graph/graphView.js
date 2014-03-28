@@ -26,7 +26,7 @@ function ($, _, Marionette, Graph, Transaction, GraphTopView) {
 		initialize: function() {
 			this.listenTo(this.model, "change:data", this.updateGraph);
 			this.start = 0;
-			this.end = 60;
+			this.end = 365;
 		},
 
 		_getSliderValues: function() {
