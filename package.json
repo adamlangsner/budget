@@ -3,17 +3,18 @@
     "description": "Grunt dependencies for various site related tasks",
     "version": "0.0.1",
     "dependencies": {
+        "ejs": "*",
+        "express": "*",
         "grunt": "*",
+        "grunt-cli": "^1.3.2",
+        "grunt-compass": "*",
+        "grunt-contrib-concat": "*",
+        "grunt-contrib-copy": "*",
+        "grunt-contrib-uglify": "*",
+        "grunt-contrib-watch": "*",
+        "grunt-css": "*",
         "grunt-notify": "*",
         "grunt-requirejs": "*",
-        "grunt-contrib-watch": "*",
-        "grunt-contrib-concat": "*",
-        "grunt-contrib-uglify": "*",
-        "grunt-contrib-copy": "*",
-        "grunt-compass": "*",
-        "grunt-css": "*",
-        "express": "*",
-        "underscore": "*",
-        "ejs": "*"
+        "underscore": "*"
     }
 }

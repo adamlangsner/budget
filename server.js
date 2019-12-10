@@ -16,22 +16,11 @@ console.log('...running in ' + (production ? 'production' : 'development') + ' m
 var assets_dir = __dirname + (production ? '/build' : '/public'),
     views_dir = __dirname + '/views';
 
-app.configure(function() {
-    // set ejs as view rendering engine
-    app.set('view engine', 'ejs');
-    app.set('views', views_dir);
+app.set('view engine', 'ejs');
+app.set('views', views_dir);
 
-    // serves frontend application
-    app.use(express.static(assets_dir));
-
-    app.use(express.errorHandler({
-        dumpExceptions: true,
-        showStack: true
-    }));
-
-    app.use(express.logger());
-    app.use(app.router);
-});
+// serves frontend application
+app.use(express.static(assets_dir));
 
 // serves index ejs file
 app.get("/", function(req, res) {

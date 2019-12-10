@@ -24,6 +24,21 @@ function($, _, ModalView) {
         },
 
         onComplete: function(e) {
+            if (!this.ui.inputName.val()) {
+                window.alert("Name can't be blank.");
+                return;
+            }
+
+            if (this.ui.inputType.find('button.active').length == 0) {
+                window.alert("Please select Income or Expense.");
+                return;
+            }
+
+            if (!this.ui.inputAmount.val()) {
+                window.alert("Amount can't be blank.");
+                return;
+            }
+
             this.model.set({
                 name: this.ui.inputName.val(),
                 amount: parseInt(this.ui.inputAmount.val()) || 0,

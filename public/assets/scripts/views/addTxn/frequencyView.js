@@ -51,6 +51,11 @@ function($, _, ModalView) {
             var typeVal = this.$('input:checked[name=type]').val(),
                 attrs = {};
 
+            if (!typeVal) {
+                window.alert('Please select one of the three frequency types.');
+                return;
+            }
+
             switch(typeVal) {
                 case 'one_time':
                     attrs.unit = typeVal;
